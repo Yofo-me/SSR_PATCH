@@ -1,5 +1,6 @@
 local ucursor = require"luci.model.uci".cursor()
 local json = require "luci.jsonc"
+local name = "shadowsocksr"
 local server_section = arg[1]
 local proto = arg[2]
 local local_port = arg[3]
