@@ -11,6 +11,8 @@ end
 
 local uci = luci.model.uci.cursor()
 
+local sys = require "luci.sys"
+
 m = Map(shadowsocksr, translate("ShadowSocksR Plus+ Settings"))
 
 m:section(SimpleSection).template  = "shadowsocksr/status"
@@ -48,7 +50,7 @@ end
 table.sort(key_table_v2)
 
 -- [[ Global Setting ]]--
-s = m:section(TypedSection, "global",translate("基本设置 [SS(R)|V2ray|Trojan]"))
+s = m:section(TypedSection, "global")
 s.anonymous = true
 
 o = s:option(ListValue, "global_server", translate("Main Server"))
@@ -120,7 +122,8 @@ o:value("gfw", translate("GFW List Mode"))
 o:value("router", translate("IP Route Mode"))
 o:value("all", translate("Global Mode"))
 o:value("oversea", translate("Oversea Mode"))
-o.default = "router"
+o.default = gfw
+
 o = s:option(ListValue, "dports", translate("Proxy Ports"))
 o:value("1", translate("All Ports"))
 o:value("2", translate("Only Common Ports"))
@@ -128,6 +131,7 @@ o.default = 1
 
 o = s:option(ListValue, "pdnsd_enable", translate("Resolve Dns Mode"))
 o:value("1", translate("Use Pdnsd tcp query and cache"))
+o:value("2", translate("Use DNS2SOCKS query and cache"))
 o:value("0", translate("Use Local DNS Service listen port 5335"))
 o.default = 1
 
@@ -146,5 +150,7 @@ o:value("1.1.1.1:53", translate("Cloudflare DNS (1.1.1.1)"))
 o:value("114.114.114.114:53", translate("Oversea Mode DNS-1 (114.114.114.114)"))
 o:value("114.114.115.115:53", translate("Oversea Mode DNS-2 (114.114.115.115)"))
 o:depends("pdnsd_enable", "1")
+o:depends("pdnsd_enable", "2")
+o.description = translate("Custom DNS Server format as IP:PORT (default: 8.8.4.4:53)")
 
 return m
