@@ -4,6 +4,7 @@
 
 local m, s, sec, o, kcp_enable
 local shadowsocksr = "shadowsocksr"
+
 local uci = luci.model.uci.cursor()
 
 local sys = require "luci.sys"
@@ -59,11 +60,11 @@ o:value("", translate("Disable"))
 o:value("same", translate("Same as Global Server"))
 for _,key in pairs(key_table) do o:value(key,server_table[key]) end
 
-o = s:option(Flag, "v2ray_flow", translate("¿ªÆôV2ray·ÖÁ÷"))
+o = s:option(Flag, "v2ray_flow", translate("å¼€å¯V2rayåˆ†æµ"))
 o.rmempty = false
-o.description = translate("µ±Ê¹ÓÃv2ray·ÖÁ÷¹¦ÄÜÊ± Ö÷·şÎñÆ÷±ØĞëÎªV2ray")
+o.description = translate("å½“ä½¿ç”¨v2rayåˆ†æµåŠŸèƒ½æ—¶ ä¸»æœåŠ¡å™¨å¿…é¡»ä¸ºV2ray")
 
-o = s:option(ListValue, "youtube_server", translate("Youtube ´úÀí"))
+o = s:option(ListValue, "youtube_server", translate("Youtube ä»£ç†"))
 o:value("nil", translate("Same as Global Server"))
 for _,key in pairs(key_table_v2) do o:value(key,v2ray_table[key]) end
 o:depends("v2ray_flow", "1")
@@ -71,28 +72,28 @@ o.default = "nil"
 
 
 
-o = s:option(ListValue, "tw_video_server", translate("Ì¨ÍåÊÓÆµ·şÎñ´úÀí"))
+o = s:option(ListValue, "tw_video_server", translate("å°æ¹¾è§†é¢‘æœåŠ¡ä»£ç†"))
 o:value("nil", translate("Same as Global Server"))
 for _,key in pairs(key_table_v2) do o:value(key,v2ray_table[key]) end
 o:depends("v2ray_flow", "1")
 o.default = "nil"
 
 
-o = s:option(ListValue, "netflix_server", translate("Netflix ´úÀí"))
+o = s:option(ListValue, "netflix_server", translate("Netflix ä»£ç†"))
 o:value("nil", translate("Same as Global Server"))
 for _,key in pairs(key_table_v2) do o:value(key,v2ray_table[key]) end
 o:depends("v2ray_flow", "1")
 o.default = "nil"
 
 
-o = s:option(ListValue, "disney_server", translate("Diseny+ ´úÀí"))
+o = s:option(ListValue, "disney_server", translate("Diseny+ ä»£ç†"))
 o:value("nil", translate("Same as Global Server"))
 for _,key in pairs(key_table_v2) do o:value(key,v2ray_table[key]) end
 o:depends("v2ray_flow", "1")
 o.default = "nil"
 
 
-o = s:option(ListValue, "prime_server", translate("Prime Video ´úÀí"))
+o = s:option(ListValue, "prime_server", translate("Prime Video ä»£ç†"))
 o:value("nil", translate("Same as Global Server"))
 for _,key in pairs(key_table_v2) do o:value(key,v2ray_table[key]) end
 o:depends("v2ray_flow", "1")
